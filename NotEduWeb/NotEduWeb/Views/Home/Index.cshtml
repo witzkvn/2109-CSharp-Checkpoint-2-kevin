@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="homepage">
+    <div class="header-background"></div>
+    <header>
+        <div class="header-text">
+        <h1>NotEduWeb</h1>
+        <p>Votre outil de gestion de campus.</p>
+        </div>
+        <div class="header-img">
+            <img src="~/Content/Images/header.png" alt="Alternate Text" />
+        </div>
+    </header>
+
+    <main>
+        <h2>Par où voulez-vous commencer ?</h2>
+        <div class="home-actions">
+            <a href="@Url.Action("Index", "Eleves")" class="btn btn-secondary">Elèves</a>
+            <a href="@Url.Action("Index", "Cours")" class="btn btn-secondary">Cours</a>
+            <a href="@Url.Action("Index", "Notes")" class="btn btn-secondary">Notes</a>
+            <a href="@Url.Action("Index", "Promotions")" class="btn btn-secondary">Promotions</a>
+        </div>
+    </main>
+        <a href="@Url.Action("Index", "Historique")" class="btn btn-transparent">Historique des résultats</a>
+</div>

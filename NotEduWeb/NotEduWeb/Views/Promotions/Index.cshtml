@@ -1,0 +1,34 @@
+﻿@model IEnumerable<NotEduWeb.Models.Promotions>
+
+@{
+    ViewBag.Title = "Liste des promotions";
+}
+
+<div class="listpage promopage">
+    <h2>Liste des promotions</h2>
+
+    <a href="@Url.Action("Create","Promotions")" class="btn btn-primary">
+        <ion-icon name="add-circle"></ion-icon>
+        Créer une promotion
+    </a>
+    @foreach (var item in Model)
+    {
+        <div class="listpage-item box">
+            <div class="listpage-item-first">
+                @Html.DisplayFor(modelItem => item.annee) - @Html.DisplayFor(modelItem => item.nom)
+            </div>
+            <div class="listpage-item-buttons">
+                <a href="@Url.Action("Edit","Promotions",new { id = item.ID_promotion })" class="btn btn-secondary">
+                    Editer
+                </a>
+                <a href="@Url.Action("Details","Promotions",new { id = item.ID_promotion })" class="btn btn-secondary">
+                    Détails
+                </a>
+                <a href="@Url.Action("Delete","Promotions",new { id = item.ID_promotion })" class="btn btn-warning">
+                    Supprimer
+                </a>
+            </div>
+        </div>
+    }
+
+</div>

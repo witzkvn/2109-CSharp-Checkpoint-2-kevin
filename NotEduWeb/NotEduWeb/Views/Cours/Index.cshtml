@@ -1,0 +1,36 @@
+﻿@model IEnumerable<NotEduWeb.Models.Cours>
+
+@{
+    ViewBag.Title = "Liste des cours";
+}
+
+<div class="listpage courspage">
+
+    <h2>Liste des cours</h2>
+
+    <a href="@Url.Action("Create", "Cours")" class="btn btn-primary">
+        <ion-icon name="add-circle"></ion-icon>
+        Créer un cours
+    </a>
+
+
+    @foreach (var item in Model)
+    {
+        <div class="listpage-item box">
+            <div class="listpage-item-first">
+                @Html.DisplayFor(modelItem => item.nom)
+            </div>
+            <div class="listpage-item-buttons">
+                <a href="@Url.Action("Edit","Cours",new { id = item.ID_cours })" class="btn btn-secondary">
+                    Editer
+                </a>
+                <a href="@Url.Action("Details","Cours",new { id = item.ID_cours })" class="btn btn-secondary">
+                    Détails
+                </a>
+                <a href="@Url.Action("Delete","Cours",new { id = item.ID_cours })" class="btn btn-warning">
+                    Supprimer
+                </a>
+            </div>
+        </div>
+    }
+</div>

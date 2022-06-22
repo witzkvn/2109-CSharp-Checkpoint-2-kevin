@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NotEduWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="ID_cours" />
+          </Key>
+          <Property Name="ID_cours" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Eleves">
+          <Key>
+            <PropertyRef Name="ID_eleve" />
+          </Key>
+          <Property Name="ID_eleve" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_naissance" Type="datetime" Nullable="false" />
+          <Property Name="fk_eleve_promotion" Type="int" />
+        </EntityType>
+        <EntityType Name="Notes">
+          <Key>
+            <PropertyRef Name="fk_note_eleve" />
+            <PropertyRef Name="fk_note_cours" />
+          </Key>
+          <Property Name="valeur" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="appreciation" Type="varchar(max)" />
+          <Property Name="fk_note_eleve" Type="int" Nullable="false" />
+          <Property Name="fk_note_cours" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Promotions">
+          <Key>
+            <PropertyRef Name="ID_promotion" />
+          </Key>
+          <Property Name="ID_promotion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="annee" Type="int" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Eleves__fk_eleve__267ABA7A">
+          <End Role="Promotions" Type="Self.Promotions" Multiplicity="0..1" />
+          <End Role="Eleves" Type="Self.Eleves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotions">
+              <PropertyRef Name="ID_promotion" />
+            </Principal>
+            <Dependent Role="Eleves">
+              <PropertyRef Name="fk_eleve_promotion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notes__fk_note_c__2C3393D0">
+          <End Role="Cours" Type="Self.Cours" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="ID_cours" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="fk_note_cours" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notes__fk_note_e__2B3F6F97">
+          <End Role="Eleves" Type="Self.Eleves" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Eleves">
+              <PropertyRef Name="ID_eleve" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="fk_note_eleve" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NotEduWebModelStoreContainer">
+          <EntitySet Name="Cours" EntityType="Self.Cours" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Eleves" EntityType="Self.Eleves" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promotions" EntityType="Self.Promotions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Eleves__fk_eleve__267ABA7A" Association="Self.FK__Eleves__fk_eleve__267ABA7A">
+            <End Role="Promotions" EntitySet="Promotions" />
+            <End Role="Eleves" EntitySet="Eleves" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notes__fk_note_c__2C3393D0" Association="Self.FK__Notes__fk_note_c__2C3393D0">
+            <End Role="Cours" EntitySet="Cours" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notes__fk_note_e__2B3F6F97" Association="Self.FK__Notes__fk_note_e__2B3F6F97">
+            <End Role="Eleves" EntitySet="Eleves" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NotEduWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="ID_cours" />
+          </Key>
+          <Property Name="ID_cours" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Notes" Relationship="Self.FK__Notes__fk_note_c__2C3393D0" FromRole="Cours" ToRole="Notes" />
+        </EntityType>
+        <EntityType Name="Eleves">
+          <Key>
+            <PropertyRef Name="ID_eleve" />
+          </Key>
+          <Property Name="ID_eleve" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_naissance" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fk_eleve_promotion" Type="Int32" />
+          <NavigationProperty Name="Promotions" Relationship="Self.FK__Eleves__fk_eleve__267ABA7A" FromRole="Eleves" ToRole="Promotions" />
+          <NavigationProperty Name="Notes" Relationship="Self.FK__Notes__fk_note_e__2B3F6F97" FromRole="Eleves" ToRole="Notes" />
+        </EntityType>
+        <EntityType Name="Notes">
+          <Key>
+            <PropertyRef Name="fk_note_eleve" />
+            <PropertyRef Name="fk_note_cours" />
+          </Key>
+          <Property Name="valeur" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="appreciation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fk_note_eleve" Type="Int32" Nullable="false" />
+          <Property Name="fk_note_cours" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cours" Relationship="Self.FK__Notes__fk_note_c__2C3393D0" FromRole="Notes" ToRole="Cours" />
+          <NavigationProperty Name="Eleves" Relationship="Self.FK__Notes__fk_note_e__2B3F6F97" FromRole="Notes" ToRole="Eleves" />
+        </EntityType>
+        <EntityType Name="Promotions">
+          <Key>
+            <PropertyRef Name="ID_promotion" />
+          </Key>
+          <Property Name="ID_promotion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="annee" Type="Int32" Nullable="false" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Eleves" Relationship="Self.FK__Eleves__fk_eleve__267ABA7A" FromRole="Promotions" ToRole="Eleves" />
+        </EntityType>
+        <Association Name="FK__Notes__fk_note_c__2C3393D0">
+          <End Role="Cours" Type="Self.Cours" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cours">
+              <PropertyRef Name="ID_cours" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="fk_note_cours" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Eleves__fk_eleve__267ABA7A">
+          <End Role="Promotions" Type="Self.Promotions" Multiplicity="0..1" />
+          <End Role="Eleves" Type="Self.Eleves" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotions">
+              <PropertyRef Name="ID_promotion" />
+            </Principal>
+            <Dependent Role="Eleves">
+              <PropertyRef Name="fk_eleve_promotion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Notes__fk_note_e__2B3F6F97">
+          <End Role="Eleves" Type="Self.Eleves" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Eleves">
+              <PropertyRef Name="ID_eleve" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="fk_note_eleve" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NotEduWebEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cours" EntityType="Self.Cours" />
+          <EntitySet Name="Eleves" EntityType="Self.Eleves" />
+          <EntitySet Name="Notes" EntityType="Self.Notes" />
+          <EntitySet Name="Promotions" EntityType="Self.Promotions" />
+          <AssociationSet Name="FK__Notes__fk_note_c__2C3393D0" Association="Self.FK__Notes__fk_note_c__2C3393D0">
+            <End Role="Cours" EntitySet="Cours" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Eleves__fk_eleve__267ABA7A" Association="Self.FK__Eleves__fk_eleve__267ABA7A">
+            <End Role="Promotions" EntitySet="Promotions" />
+            <End Role="Eleves" EntitySet="Eleves" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Notes__fk_note_e__2B3F6F97" Association="Self.FK__Notes__fk_note_e__2B3F6F97">
+            <End Role="Eleves" EntitySet="Eleves" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NotEduWebModelStoreContainer" CdmEntityContainer="NotEduWebEntities">
+          <EntitySetMapping Name="Cours">
+            <EntityTypeMapping TypeName="NotEduWebModel.Cours">
+              <MappingFragment StoreEntitySet="Cours">
+                <ScalarProperty Name="ID_cours" ColumnName="ID_cours" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Eleves">
+            <EntityTypeMapping TypeName="NotEduWebModel.Eleves">
+              <MappingFragment StoreEntitySet="Eleves">
+                <ScalarProperty Name="ID_eleve" ColumnName="ID_eleve" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="date_naissance" ColumnName="date_naissance" />
+                <ScalarProperty Name="fk_eleve_promotion" ColumnName="fk_eleve_promotion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notes">
+            <EntityTypeMapping TypeName="NotEduWebModel.Notes">
+              <MappingFragment StoreEntitySet="Notes">
+                <ScalarProperty Name="valeur" ColumnName="valeur" />
+                <ScalarProperty Name="appreciation" ColumnName="appreciation" />
+                <ScalarProperty Name="fk_note_eleve" ColumnName="fk_note_eleve" />
+                <ScalarProperty Name="fk_note_cours" ColumnName="fk_note_cours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promotions">
+            <EntityTypeMapping TypeName="NotEduWebModel.Promotions">
+              <MappingFragment StoreEntitySet="Promotions">
+                <ScalarProperty Name="ID_promotion" ColumnName="ID_promotion" />
+                <ScalarProperty Name="annee" ColumnName="annee" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

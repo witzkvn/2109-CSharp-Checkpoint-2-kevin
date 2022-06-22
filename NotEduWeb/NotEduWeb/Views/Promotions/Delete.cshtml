@@ -1,0 +1,26 @@
+﻿@model NotEduWeb.Models.Promotions
+
+@{
+    ViewBag.Title = "Supprimer une promotion";
+}
+
+<div class="deletepage">
+    <h2>Suppression d'une promotion</h2>
+
+    <div class="box">
+        <h3>Etes-vous sûr de vouloir supprimer ceci ?</h3>
+
+        <p><span class="item-title">@Html.DisplayNameFor(model => model.annee) :</span> @Html.DisplayFor(model => model.annee)</p>
+        <p><span class="item-title">@Html.DisplayNameFor(model => model.nom) :</span> @Html.DisplayFor(model => model.nom)</p>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="editpage-buttons">
+                <a class="btn btn-transparent" href="@Url.Action("Index")">Retour à la liste</a>
+                <input type="submit" value="Supprimer" class="btn btn-warning" />
+            </div>
+        }
+    </div>
+    </div>

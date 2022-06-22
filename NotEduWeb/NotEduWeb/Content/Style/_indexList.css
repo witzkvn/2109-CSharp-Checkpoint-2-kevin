@@ -1,0 +1,205 @@
+﻿.listpage .btn.btn-primary {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4rem;
+    width: max-content;
+}
+
+.listpage .btn.btn-primary ion-icon{
+    margin-right: 1rem;
+}
+
+.listpage-item {
+    display: block;
+    font-size: 1.2rem;
+}
+
+.listpage-item-first {
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.listpage-item:not(:last-of-type) {
+    margin-bottom: 2rem;
+}
+
+.listpage-item-buttons{
+    display: flex;
+    margin-top: 3rem;
+}
+
+.listpage-item-buttons .btn {
+    margin-right: 1rem;
+}
+
+.notespage .listpage-item-second{
+    margin-bottom: 1rem;
+}
+
+.delete-item {
+    margin: 2rem 0;
+}
+
+.item-title {
+    font-weight: bold;
+}
+
+/*SPECIFIC PAGES */
+.deletepage .box p,
+.detailspage .box p {
+    margin-bottom: 1rem;
+}
+
+.detailspage .box h3{
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.detailspage .moyenne-promo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 3rem;
+    margin-bottom: 2rem;
+}
+
+.detailspage .moyenne-promo a{
+    color: var(--accent-light);
+    justify-self: end;
+}
+
+.detailspage .moyenne-promo div {
+    color: var(--primary-dark);
+    font-weight: bold;
+}
+
+.edit-form {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.editpage .box,
+.createpage .box,
+.deletepage .box,
+.detailspage .box{
+    margin: 3rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.editpage-buttons {
+    font-size: 1.2rem;
+    display: flex;
+    margin-top: 1.5rem;
+}
+
+.editpage-buttons a.btn-transparent,
+.editpage-buttons a.btn-warning {
+    margin-right: 1.5rem;
+}
+.notes-list{
+    width: 60%;
+    margin: 0 auto;
+}
+
+.notes-list p:not(.appreciation-text){
+    text-align: center;
+}
+
+.bulletin{
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.bulletin-cours{
+    font-weight: bold;
+}
+
+.bulletin-remarque {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
+
+.note-eleve-item {
+    margin-bottom: 3rem;
+}
+.note-eleve-item > div:not(.appreciation) {
+    margin-bottom: 1rem;
+}
+
+.appreciation {
+    margin-left: 1rem;
+    border-radius: 10px;
+    font-style: italic;
+    background-color: var(--bg-dark);
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+.appreciation-vide {
+    font-style: initial;
+}
+
+.note-eleve {
+    color: var(--secondary-dark);
+    font-weight: bold;
+}
+
+.moyenne-generale{
+    margin-top: 5rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.moyenne-eleve{
+    color: var(--primary-dark);
+}
+
+.liste-eleves-promo ul{
+    list-style: disc;
+    margin-left: 4rem;
+}
+
+
+@media screen and (max-width: 760px) {
+    .listpage.courspage .cours-btn {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .listpage.courspage h2{
+        text-align: center;
+    }
+
+    .listpage.courspage .btn.btn-primary {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .listpage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .wrapper {
+        margin-left: 3rem;
+    }
+
+    .listpage-item {
+        width: 100%;
+    }
+
+    .edit-form {
+        width: 100%;
+    }
+
+    .notes-list {
+        width: 100%;
+    }
+}

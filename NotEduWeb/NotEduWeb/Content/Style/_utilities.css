@@ -1,0 +1,15 @@
+﻿.text-no-overflow {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.flex-cc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a.user-link{
+    color: var(--accent-dark);
+}

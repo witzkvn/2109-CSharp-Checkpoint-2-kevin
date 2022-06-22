@@ -1,0 +1,108 @@
+﻿.homepage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.homepage header h1{
+    margin-bottom: 0;
+    color: white;
+}
+.homepage header .header-text p{
+    font-weight: bold;
+    color: black;
+}
+
+.homepage header .header-text{
+    margin-right: 6rem;
+}
+
+.homepage header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40rem;
+    z-index: 1;
+}
+
+.homepage header .header-img,
+.homepage header .header-img  img{
+    height: 100%;
+}
+
+
+
+.homepage main h2{
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.homepage main{
+    width: 100%;
+    margin : auto;
+}
+
+.homepage main > a.btn.btn-transparent{
+    display: block;
+    margin: 8rem auto 0 auto;
+    width: max-content;
+}
+
+.home-actions {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0 4rem;
+}
+
+.home-actions .btn{
+    text-align: center;
+}
+
+.homepage .header-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50vh;
+    clip-path: polygon(0 0, 100% 0, 100% 55%, 0 100%);
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+    z-index: 0;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .homepage header{
+        flex-direction: column;
+        height: 20vh;
+    }
+
+    .homepage header .header-img,
+    .homepage header .header-img img {
+        display: none;
+    }
+
+    .homepage header .header-text {
+        margin-right: 0rem;
+        margin-bottom: 3rem;
+    }
+    .home-actions{
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+    }
+    .homepage .header-background {
+        clip-path: polygon(0 0, 100% 0, 100% 35%, 0 50%);
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .home-actions {
+        width: 70%;
+        margin: 0 auto;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}

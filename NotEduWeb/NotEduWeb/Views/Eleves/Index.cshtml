@@ -1,0 +1,44 @@
+﻿@model IEnumerable<NotEduWeb.Models.Eleves>
+@using NotEduWeb.Tools
+
+@{
+    ViewBag.Title = "Liste des élèves";
+}
+
+<div class="listpage elevespage">
+
+
+    <h2>Liste des élèves</h2>
+
+    <a href="@Url.Action("Create", "Eleves")" class="btn btn-primary">
+        <ion-icon name="add-circle"></ion-icon>
+        Créer un élève
+    </a>
+
+        @foreach (var item in Model)
+        {
+            <div class="listpage-item box">
+                <div class="listpage-item-first">
+                    @item.nom.ToUpper() @Utilities.GetPremiereLettreMajuscule(item.prenom)
+                </div>
+                <div class="listpage-item-second">
+                    Né(e) le @Utilities.ConvertInShortDate(item.date_naissance)
+                </div>
+                <div class="listpage-item-second">
+                    Promotion : @Html.DisplayFor(modelItem => item.Promotions.nom)
+                </div>
+                <div class="listpage-item-buttons">
+                    <a href="@Url.Action("Edit","Eleves",new { id = item.ID_eleve })" class="btn btn-secondary">
+                        Editer
+                    </a>
+                    <a href="@Url.Action("Details", "Eleves", new { id = item.ID_eleve })" class="btn btn-secondary">
+                        Détails
+                    </a>
+                    <a href="@Url.Action("Delete", "Eleves", new { id = item.ID_eleve })" class="btn btn-warning">
+                        Supprimer
+                    </a>
+                </div>
+            </div>
+        }
+
+</div>

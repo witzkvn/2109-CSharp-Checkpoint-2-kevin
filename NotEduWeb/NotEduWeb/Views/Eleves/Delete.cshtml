@@ -1,0 +1,29 @@
+﻿@model NotEduWeb.Models.Eleves
+@using NotEduWeb.Tools
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="deletepage">
+    <h2>Suppression d'un élève</h2>
+
+    <div class="box">
+        <h3>Etes-vous sûr de vouloir supprimer ceci ?</h3>
+            <div class="delete-item">
+                <p><span class="item-title">@Html.DisplayNameFor(model => model.nom) :</span> @Model.nom.ToUpper()</p>
+                <p><span class="item-title">@Html.DisplayNameFor(model => model.prenom) :</span> @Utilities.GetPremiereLettreMajuscule(Model.prenom)</p>
+                <p><span class="item-title">@Html.DisplayNameFor(model => model.date_naissance) :</span> @Utilities.ConvertInShortDate(Model.date_naissance)</p>
+                <p><span class="item-title">@Html.DisplayNameFor(model => model.Promotions.nom) :</span> @Model.Promotions.annee - @Model.Promotions.nom</p>
+            </div>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="editpage-buttons">
+                        <a class="btn btn-transparent" href="@Url.Action("Index")">Retour à la liste</a>
+                        <input type="submit" value="Supprimer" class="btn btn-warning" />
+                    </div>
+                }
+    </div>
+</div>

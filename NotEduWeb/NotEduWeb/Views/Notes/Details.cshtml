@@ -1,0 +1,36 @@
+﻿@model NotEduWeb.Models.Notes
+@using NotEduWeb.Tools
+@{
+    ViewBag.Title = "Détails";
+}
+
+<div class="detailspage">
+    <h2>Détails de la note</h2>
+
+    <div class="box">
+        <p>
+            <span class="item-title">@Html.DisplayNameFor(model => model.valeur) :</span>
+            @Html.DisplayFor(model => model.valeur) / 20
+        </p>
+        <p>
+            <span class="item-title">@Html.DisplayNameFor(model => model.appreciation) :</span>
+            @Html.DisplayFor(model => model.appreciation)
+        </p>
+        <p>
+            <span class="item-title">@Html.DisplayNameFor(model => model.Cours.nom) :</span>
+            @Html.DisplayFor(model => model.Cours.nom)
+        </p>
+        <p>
+            <span class="item-title">@Html.DisplayNameFor(model => model.Eleves.nom) :</span>
+            @Html.ActionLink(Utilities.GetNomCompletUser(Model.Eleves), "Details", "Eleves", new { id = Model.fk_note_eleve }, new { @class = "user-link" })
+        </p>
+        <p>
+            <span class="item-title">Promotion :</span>
+            @Model.Eleves.Promotions.annee - @Model.Eleves.Promotions.nom
+        </p>
+        <div class="editpage-buttons">
+            <a class="btn btn-transparent" href="@Url.Action("Index")">Retour à la liste</a>
+            <a href="@Url.Action("Edit", "Notes", new { idEleve = Model.fk_note_eleve, idCours = Model.fk_note_cours })" class="btn btn-secondary">Editer</a>
+        </div>
+    </div>    
+</div>

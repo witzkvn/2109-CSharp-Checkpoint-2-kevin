@@ -1,0 +1,44 @@
+﻿.moyennecours .btn.btn-transparent{
+    display: block;
+    margin-bottom: 1.5rem;
+    width: max-content;
+}
+.moyennecours .box > p{
+    margin-bottom: 3rem;
+    font-size: 1.2rem;
+}
+.moyennecours-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 1.5rem;
+}
+
+.moyennecours-grid > div:nth-child(1){
+    font-weight: bold;
+}
+
+.moyennecours-grid > div:nth-child(2) {
+    color: var(--accent-light);
+}
+
+.moyennecours-grid > div:nth-child(3) {
+    color: var(--primary-dark);
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1000px) {
+    .moyennecours-grid {
+        grid-template-columns: 1fr;
+        margin-bottom: 2.5rem;
+    }
+    .moyennecours-grid > div{
+        margin-bottom: 0.5rem;
+    }
+
+}
+
+@media screen and (max-width: 670px) {
+    .moyennecours .btn.btn-transparent {
+        margin: 0 auto 1.5rem auto;
+    }
+}

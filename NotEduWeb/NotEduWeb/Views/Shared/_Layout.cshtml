@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mon application ASP.NET</title>
+    <link href="~/Content/Style/_all.css" rel="stylesheet" />
+    @*@Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar">
+
+        <div class="navbar-links">
+            <a class="nav-item" href="@Url.Action("Index", "Home")">
+                <div class="flex-cc">
+                    <ion-icon name="home"></ion-icon>
+                </div>
+            </a>
+            <a href="@Url.Action("Index", "Eleves")" class="nav-item">
+                <div class="nav-btn flex-cc">
+                    <ion-icon name="person"></ion-icon>
+                    <p>Elèves</p>
+                </div>
+            </a>
+            <a href="@Url.Action("Index", "Cours")" class="nav-item">
+                <div class="nav-btn flex-cc">
+                    <ion-icon name="book"></ion-icon>
+                    <p>Cours</p>
+                </div>
+            </a>
+            <a href="@Url.Action("Index", "Notes")" class="nav-item">
+                <div class="nav-btn flex-cc">
+                    <ion-icon name="pencil"></ion-icon>
+                    <p>Notes</p>
+                </div>
+            </a>
+            <a href="@Url.Action("Index", "Promotions")" class="nav-item">
+                <div class="nav-btn flex-cc">
+                    <ion-icon name="school"></ion-icon>
+                    <p>Promotions</p>
+                </div>
+            </a>
+            <a href="@Url.Action("Index", "Historique")"  class="nav-item">
+                <div class="nav-btn flex-cc">
+                    <ion-icon name="reader"></ion-icon>
+                    <p>Historique</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="theme-switcher" id="themeBtn">
+
+            <button id="moonBtn" type="button" class="btn-dark flex-cc themeBtn">
+                <ion-icon name="moon"></ion-icon>
+            </button>
+
+            <button id="sunBtn" type="button" class="btn-light flex-cc themeBtn">
+                <ion-icon name="sunny"></ion-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+
+        <footer>
+            <p>&copy; @DateTime.Now.Year - NotEduWeb - Projet WCS Strasbourg - <a href="https://github.com/witzkvn">WITZ Kevin</a></p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="~/Content/themeSwitcher.js"></script>
+</body>
+</html>

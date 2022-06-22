@@ -1,0 +1,68 @@
+﻿@model NotEduWeb.Models.Eleves
+@using NotEduWeb.Tools
+
+@{
+    ViewBag.Title = "Détails de l'élève";
+}
+
+<div class="detailspage">
+    <h2>Détails de l'élève</h2>
+
+    <div class="box">
+        <h3>Informations personnelles</h3>
+        <p>
+            <span class="item-title">@Html.DisplayNameFor(model => model.nom) :</span>
+            @Model.nom.ToUpper()
+        </p>
+        <p>
+            <span class="item-title">@Html.DisplayNameFor(model => model.prenom) :</span>
+            @Utilities.GetPremiereLettreMajuscule(Model.prenom)
+        </p>
+        <p>
+            <span class="item-title">@Html.DisplayNameFor(model => model.date_naissance) :</span>
+            @Utilities.ConvertInShortDate(Model.date_naissance)
+        </p>
+        <p>
+            <span class="item-title">@Html.DisplayNameFor(model => model.Promotions.nom) :</span>
+            @Model.Promotions.annee - @Model.Promotions.nom
+        </p>
+        <div class="editpage-buttons">
+            <a class="btn btn-transparent" href="@Url.Action("Index")">Retour à la liste</a>
+            <a href="@Url.Action("Edit", "Eleves", new { id = Model.ID_eleve })" class="btn btn-secondary">Editer</a>
+        </div>
+    </div>
+</div>
+
+    <div class="box">
+        <h3 class="bulletin">Bulletin de l'élève</h3>
+        <div class="notes-list">
+            @if (@ViewBag.listeNotes.Count > 0)
+            {
+                foreach (var note in @ViewBag.listeNotes)
+                {
+            <div class="note-eleve-item">
+                <div>
+                    <a class="bulletin-cours" href="@Url.Action("Details", "Cours", new { id = note.Cours.ID_cours })">@note.Cours.nom</a> : <span class="note-eleve">@note.valeur / 20</span>
+                </div>
+                <div class="appreciation">
+                    @if(note.appreciation != null)
+                    {
+                        <p class="appreciation-text">" @note.appreciation "</p>
+                    }
+                    else
+                    {
+                        <p class="appreciation-text appreciation-vide">(Aucune appréciation saisie)</p>
+                    }
+                </div>
+            </div>
+                }
+                <p class="moyenne-generale">Moyenne générale : <span class="moyenne-eleve">@ViewBag.moyenne / 20</span></p>
+            }
+            else
+            {
+                <p>Aucune note pour le moment.</p>
+                <p class="moyenne-generale">Moyenne générale : non définie.</p>
+            }
+            <p class="bulletin-remarque">NB : La moyenne est ici arrondie.</p>
+        </div>
+    </div>

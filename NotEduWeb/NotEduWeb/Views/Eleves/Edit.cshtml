@@ -1,0 +1,77 @@
+﻿@model NotEduWeb.Models.Eleves
+
+@{
+    ViewBag.Title = "Editer un élève";
+}
+
+<div class="editpage">
+    <h2>Edition d'un élève</h2>
+
+    <div class="box">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="edit-form">
+                @Html.ValidationSummary(true, "", new { @class = "error" })
+                @Html.HiddenFor(model => model.ID_eleve)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nom, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.nom, new { htmlAttributes = new { @class = "form-control" } })
+                    <p class="error">
+                        @Html.ValidationMessageFor(model => model.nom, "", new { @class = "error" })
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.prenom, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.EditorFor(model => model.prenom, new { htmlAttributes = new { @class = "form-control" } })
+                    <p class="error">
+                        @Html.ValidationMessageFor(model => model.prenom, "", new { @class = "error" })
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.date_naissance, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <input class="form-control" type="date" value="@ViewBag.date" name="date_naissance" id="date_naissance" />
+                    <p class="error">
+                        @Html.ValidationMessageFor(model => model.date_naissance, "", new { @class = "error" })
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fk_eleve_promotion, "Promotion", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <select class="form-control" id="fk_eleve_promotion" name="fk_eleve_promotion">
+                            @if (ViewBag.promos.Count > 0)
+                            {
+                                foreach (var item in ViewBag.promos)
+                                {
+                                    <option selected="@Model.Promotions.ID_promotion == @item.Key ? " selected":""" value="@item.Key">@item.Value</option>
+                                }
+
+                            }
+                            else
+                            {
+                                <option value=""></option>
+                                @Html.ActionLink("Créer une promotion", "Create", "Promotions")
+                            }
+                        </select>
+                    <p class="error">
+                        @Html.ValidationMessageFor(model => model.fk_eleve_promotion, "", new { @class = "error" })
+                    </p>
+                </div>
+
+                <div class="editpage-buttons">
+                    <a class="btn btn-transparent" href="@Url.Action("Index")">Retour à la liste</a>
+                     <input type="submit" value="Mettre à jour" class="btn btn-secondary" />
+                </div>
+            </div>
+        }
+        </div>
+
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+    </div>

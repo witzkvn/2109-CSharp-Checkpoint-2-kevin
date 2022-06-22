@@ -1,0 +1,27 @@
+﻿@model List<NotEduWeb.Models.MoyenneParCours>
+@using NotEduWeb.Tools
+@{
+    ViewBag.Title = "Historique des résultats";
+}
+
+<div class="moyennecours">
+    <h2>Historique des résultats</h2>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-transparent">Retour à l'accueil</a>
+    <div class="box">
+        <h3>Voici l'historique des moyennes de chaque promotion par matière</h3>
+        <p>NB: Les notes ne sont pas arrondies ici.</p>
+        @foreach (var item in Model)
+        {
+            <div class="moyennecours-grid">
+                <div>
+                    <a href="@Url.Action("Details", "Cours", new { id = item.CoursID })">@item.Cours</a>
+                </div>
+                <div>
+                    <a href="@Url.Action("Details", "Promotions", new { id = item.PromotionID })">@item.Annee - @item.Promotion</a>
+                </div>
+                <div>@string.Format("{0:N2}", item.Moyenne) / 20</div>
+            </div>
+        }
+    </div>
+</div>
+

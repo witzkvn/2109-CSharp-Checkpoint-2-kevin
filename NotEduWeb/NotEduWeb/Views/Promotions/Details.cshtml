@@ -1,0 +1,64 @@
+﻿@model NotEduWeb.Models.Promotions
+@using NotEduWeb.Tools
+@{
+    ViewBag.Title = "Détails";
+}
+
+<div class="detailspage">
+    <h2>Détails de la promotion</h2>
+
+    <div class="box">
+        <p>
+            <span class="item-title">@Html.DisplayNameFor(model => model.annee) :</span>
+            @Html.DisplayFor(model => model.annee)
+        </p>
+
+        <p>
+            <span class="item-title">@Html.DisplayNameFor(model => model.nom) :</span>
+            @Html.DisplayFor(model => model.nom)
+        </p>
+        <div class="editpage-buttons">
+            <a class="btn btn-transparent" href="@Url.Action("Index")">Retour à la liste</a>
+            <a href="@Url.Action("Edit", "Promotions", new { id = Model.ID_promotion })" class="btn btn-secondary">Editer</a>
+        </div>
+    </div>
+
+    <div class="box">
+        <h3>Moyennes des cours de la promotion</h3>
+        @if (ViewBag.MoyennesPromos.Count > 0)
+        {
+            foreach (var item in ViewBag.MoyennesPromos)
+            {
+                <div class="moyenne-promo">
+                    <a href="@Url.Action("Details", "Cours", new { id = item.CoursID })">@item.Cours</a>
+                    <div>@string.Format("{0:N2}", item.Moyenne) / 20</div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Aucune donnée à afficher pour le moment.</p>
+        }
+    </div>
+
+    <div class="box liste-eleves-promo">
+        <h3>Elèves de la promotion</h3>
+        @if (ViewBag.ElevesPromo.Count > 0)
+        {
+            <ul>
+                @foreach (var eleve in ViewBag.ElevesPromo)
+                {
+                    string name = Utilities.GetNomCompletUser(eleve);
+                    <li>
+                        @Html.ActionLink(name, "Details", "Eleves", new { id = eleve.ID_eleve }, new { @class = "user-link" }), né(e) le @Utilities.ConvertInShortDate(eleve.date_naissance)
+                    </li>
+                }
+            </ul>
+
+        }
+        else
+        {
+            <p>Aucun élève pour le moment.</p>
+        }
+    </div>
+</div>
